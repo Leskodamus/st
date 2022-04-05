@@ -4,6 +4,7 @@ The [suckless simple terminal](https://st.suckless.org/).
 
 ## Patches applied
 
++ alpha
 + clipboard 
 + newterm
 + scrollback 
