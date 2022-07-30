@@ -30,3 +30,4 @@ sudo make clean install
 
 ## del key not working
 Add `set enable-keypad on` to `/etc/inputrc` or `~/.inputrc`.
+
