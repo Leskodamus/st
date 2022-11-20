@@ -1,12 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
-/*
- * appearance
- *
- * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
- */
-static char *font = "IBMPlexMono:regular:pixelsize=16:antialias=true:autohint=true";
-static int borderpx = 10;
+/* Appearance */
+static char *font = "Ibm Plex Mono:pixelsize=16:antialias=true:autohint=true";
+static int borderpx = 2;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -16,13 +12,13 @@ static int borderpx = 10;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/sh";
+static char *shell = "/bin/zsh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
-/* identification sequence returned in DA and DECID */
+/* Identification sequence returned in DA and DECID */
 char *vtiden = "\033[?6c";
 
 /* Kerning / character bounding-box multipliers */
@@ -30,25 +26,25 @@ static float cwscale = 1.0;
 static float chscale = 1.0;
 
 /*
- * word delimiter string
+ * Word delimiter string
  *
  * More advanced example: L" `'\"()[]{}"
  */
 wchar_t *worddelimiters = L" ";
 
-/* selection timeouts (in milliseconds) */
+/* Selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
 static unsigned int tripleclicktimeout = 600;
 
-/* alt screens */
+/* Alt screens */
 int allowaltscreen = 1;
 
-/* allow certain non-interactive (insecure) window operations such as:
+/* Allow certain non-interactive (insecure) window operations such as:
    setting the clipboard text */
 int allowwindowops = 0;
 
 /*
- * draw latency range in ms - from new content/keypress/etc until drawing.
+ * Draw latency range in ms - from new content/keypress/etc until drawing.
  * within this range, st draws when content stops arriving (idle). mostly it's
  * near minlatency, but it waits longer for slow updates to avoid partial draw.
  * low minlatency will tear/flicker more, as it can "detect" idle too early.
@@ -57,27 +53,27 @@ static double minlatency = 8;
 static double maxlatency = 33;
 
 /*
- * blinking timeout (set to 0 to disable blinking) for the terminal blinking
+ * Blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 0;
 
 /*
- * thickness of underline and bar cursors
+ * Thickness of underline and bar cursors
  */
 static unsigned int cursorthickness = 2;
 
 /*
- * bell volume. It must be a value between -100 and 100. Use 0 for disabling
+ * Bell volume. It must be a value between -100 and 100. Use 0 for disabling
  * it
  */
 static int bellvolume = 0;
 
-/* default TERM value */
+/* Default TERM value */
 char *termname = "st-256color";
 
 /*
- * spaces per tab
+ * Spaces per tab
  *
  * When you are changing this value, don't forget to adapt the »it« value in
  * the st.info and appropriately install the st.info in the environment where
@@ -93,51 +89,46 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* bg opacity */
-float alpha = 0.99;
-
 /* Terminal colors (16 first used in escape sequence) */
+/* Gruber Darker Theme */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"#000000",
-	"#cc0403",
-	"#19cb00",
-	"#cecb00",
-	"#0d73cc",
-	"#cb1ed1",
-	"#0dcdcd",
-	"#dddddd",
+    "#2E3436",
+    "#a40000",
+    "#4E9A06",
+    "#C4A000",
+    "#3465A4",
+    "#75507B",
+    "#ce5c00",
+    "#babdb9",
 
 	/* 8 bright colors */
-	"#767676",
-	"#f2201f",
-	"#23fd00",
-	"#fffd00",
-	"#1a8fff",
-	"#fd28ff",
-	"#14ffff",
-	"#ffffff",
+    "#555753",
+    "#EF2929",
+    "#8AE234",
+    "#FCE94F",
+    "#729FCF",
+    "#AD7FA8",
+    "#fcaf3e",
+    "#EEEEEC",
 
 	[255] = 0,
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"black",
-	"#ffff00",
-	"#00fffa",
-	"#141414",
-	"#0d0d0d",
+	/* More colors can be added after 255 to use with DefaultXX */
+	"#cccccc", /* default reverse cursor colour */
+	"#555555", /* default cursor colour */
+	"#e4e4ef", /* default foreground colour */
+	"#181818", /* default background colour */
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 15;
-unsigned int defaultbg = 262;
-unsigned int defaultcs = 15;
-static unsigned int defaultrcs = 0;
+unsigned int defaultfg = 258;
+unsigned int defaultbg = 259;
+unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
@@ -181,8 +172,8 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 3},      0, /* !alt */ -1 },
-	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 3},      0, /* !alt */ -1 },
+	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1},		0, /* !alt */ -1 },
+	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1},		0, /* !alt */ -1 },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -202,13 +193,13 @@ static Shortcut shortcuts[] = {
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
 	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_parenright,  zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
+    { TERMMOD,              XK_Return,      newterm,        {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };

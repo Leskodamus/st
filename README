@@ -1,0 +1,62 @@
+st - simple terminal
+--------------------
+st is a simple terminal emulator for X which sucks less.
+
+
+Requirements
+------------
+In order to build st you need the Xlib header files.
+
+
+Installation
+------------
+Edit config.mk to match your local setup (st is installed into
+the /usr/local namespace by default).
+
+Afterwards enter the following command to build and install st (if
+necessary as root):
+
+    make clean install
+
+
+Running st
+----------
+If you did not install st with make clean install, you must compile
+the st terminfo entry with the following command:
+
+    tic -sx st.info
+
+See the man page for additional details.
+
+
+Configuration
+-------------
+The configuration of st is done by editing config.h
+and (re)compiling the source code.
+
+
+Useful keyboard shortcuts
+-------------------------
+* Ctrl+Shift+J to zoom out
+* Ctrl+Shift+K to zoom in
+* Ctrl+Shift+0 to reset zoom
+* Ctrl+Shift+C to copy
+* Ctrl+Shift+V to paste
+* Select and middle mouse button also copies and pastes
+
+
+If the del key does not work, you mat have to add 
+
+    set enable-keypad on`
+
+to /etc/inputrc or ~/.inputrc.
+
+
+Patches
+-------
+* anysize
+* newterm
+* scrollback
+* scrollback-mouse
+* scrollback-mouse-altscreen
+* scrollback-reflow

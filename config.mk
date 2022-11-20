@@ -1,7 +1,5 @@
 # st version
-VERSION = 0.8.5
-
-# Customize below to fit your system
+VERSION = 0.9
 
 # paths
 PREFIX = /usr/local
@@ -16,20 +14,14 @@ PKG_CONFIG = pkg-config
 INCS = -I$(X11INC) \
        `$(PKG_CONFIG) --cflags fontconfig` \
        `$(PKG_CONFIG) --cflags freetype2`
-LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender\
+LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
        `$(PKG_CONFIG) --libs fontconfig` \
        `$(PKG_CONFIG) --libs freetype2`
 
 # flags
 STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
-STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
+STCFLAGS = -std=c17 -pedantic -Wall -Wno-deprecated-declarations -Os $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
 STLDFLAGS = $(LIBS) $(LDFLAGS)
 
-# OpenBSD:
-#CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
-#LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft \
-#       `$(PKG_CONFIG) --libs fontconfig` \
-#       `$(PKG_CONFIG) --libs freetype2`
-
 # compiler and linker
-# CC = c99
+CC = cc
