@@ -1,4 +1,5 @@
 /* See LICENSE for license details. */
+
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -40,7 +41,6 @@ extern char *argv0;
 #define HISTSIZE      2000
 #define RESIZEBUFFER  1000
 
-/* macros */
 #define IS_SET(flag)		((term.mode & (flag)) != 0)
 #define ISCONTROLC0(c)		(BETWEEN(c, 0, 0x1f) || (c) == 0x7f)
 #define ISCONTROLC1(c)		(BETWEEN(c, 0x80, 0x9f))

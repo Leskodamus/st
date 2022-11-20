@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-/* macros */
 #define MIN(a, b)		((a) < (b) ? (a) : (b))
 #define MAX(a, b)		((a) < (b) ? (b) : (a))
 #define LEN(a)			(sizeof(a) / sizeof(a)[0])
